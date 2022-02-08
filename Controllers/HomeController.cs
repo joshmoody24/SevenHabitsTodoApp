@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SevenHabitsTodoApp.Models;
+//using SevenHabitsTodoApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -23,15 +23,5 @@ namespace SevenHabitsTodoApp.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }
