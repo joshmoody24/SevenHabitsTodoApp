@@ -11,17 +11,47 @@ namespace SevenHabitsTodoApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        //TODO: taskContext goes here
+
+
+        //TODO: assign taskContext in constructor
+        public HomeController()
         {
-            _logger = logger;
+
         }
+
 
         public IActionResult Index()
         {
             return View();
         }
+
+        public IActionResult Quadrant()
+        {
+            return View();
+        }
+
+        public IActionResult CreateTask()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult UpdateTask()
+        {
+            return View();
+        }
+
+        //TODO: Post method for update task
+
+        [HttpGet]
+        public IActionResult DeleteTask()
+        {
+            return View();
+        }
+
+        //TODO: Post method for delete task
 
     }
 }
