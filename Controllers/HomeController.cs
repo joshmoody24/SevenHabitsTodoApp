@@ -6,19 +6,19 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using SevenHabitsTodoApp.Models;
 
 namespace SevenHabitsTodoApp.Controllers
 {
     public class HomeController : Controller
     {
 
-        //TODO: taskContext goes here
-
+        private TaskEntryContext taskEntryContext;
 
         //TODO: assign taskContext in constructor
-        public HomeController()
+        public HomeController(TaskEntryContext tc)
         {
-
+            taskEntryContext = tc;
         }
 
 
@@ -32,26 +32,69 @@ namespace SevenHabitsTodoApp.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult CreateTask()
         {
-            return View();
+            List<Category> categories = taskEntryContext.Categories.ToList();
+            return View(categories);
+        }
+
+        [HttpPost]
+        public IActionResult CreateTask(TaskEntry taskEntry)
+        {
+            if (ModelState.IsValid)
+            {
+                taskEntryContext.Add(taskEntry);
+                taskEntryContext.SaveChanges();
+                // change this next line to whatever page we want the user to be redirected to
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.Categories = taskEntryContext.Categories.ToList();
+                return View();
+            }
         }
 
         [HttpGet]
-        public IActionResult UpdateTask()
+        public IActionResult EditTask(int taskEntryId)
         {
-            return View();
+            //reuse create task as edit form
+            ViewBag.Categories = taskEntryContext.Categories.ToList();
+            var taskEntry = taskEntryContext.Responses.Single(x => x.TaskID == taskEntryId);
+            return View("CreateTask", taskEntry);
         }
 
-        //TODO: Post method for update task
+        [HttpPost]
+        public IActionResult EditTask(TaskEntry taskEntry)
+        {
+            if (ModelState.IsValid)
+            {
+                taskEntryContext.Update(taskEntry);
+                taskEntryContext.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.Categories = taskEntryContext.Categories.ToList();
+                return View("CreateTask");
+            }
+        }
 
         [HttpGet]
-        public IActionResult DeleteTask()
+        public IActionResult DeleteTask(int taskEntryId)
         {
-            return View();
+            TaskEntry taskEntry = taskEntryContext.Responses.Single(x => x.TaskID == taskEntryId);
+
+            return View(taskEntry);
         }
 
-        //TODO: Post method for delete task
-
+        [HttpPost]
+        public IActionResult DeleteTask(TaskEntry taskEntry)
+        {
+            taskEntryContext.Responses.Remove(taskEntry);
+            taskEntryContext.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
