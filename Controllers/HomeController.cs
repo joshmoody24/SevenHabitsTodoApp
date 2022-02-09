@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SevenHabitsTodoApp.Models;
+//using SevenHabitsTodoApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,27 +11,47 @@ namespace SevenHabitsTodoApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        //TODO: taskContext goes here
+
+
+        //TODO: assign taskContext in constructor
+        public HomeController()
         {
-            _logger = logger;
+
         }
+
 
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Quadrant()
         {
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult CreateTask()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
         }
+
+        [HttpGet]
+        public IActionResult UpdateTask()
+        {
+            return View();
+        }
+
+        //TODO: Post method for update task
+
+        [HttpGet]
+        public IActionResult DeleteTask()
+        {
+            return View();
+        }
+
+        //TODO: Post method for delete task
+
     }
 }
