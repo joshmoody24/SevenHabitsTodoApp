@@ -78,7 +78,7 @@ namespace SevenHabitsTodoApp.Controllers
             ViewBag.New = false;
             
             ViewBag.Categories = taskEntryContext.Categories.ToList();
-            return View("CreateTask");
+            return View("TaskList");
             
         }
 
@@ -95,7 +95,7 @@ namespace SevenHabitsTodoApp.Controllers
         {
             taskEntryContext.Responses.Remove(taskEntry);
             taskEntryContext.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("TaskList");
         }
     }
 }
