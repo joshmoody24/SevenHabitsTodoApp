@@ -26,4 +26,7 @@
     </PackageReference>
   </ItemGroup>
   
+  <ItemGroup>
+    <Content Remove="Views\Home\Delete.cshtml" />
+  </ItemGroup>
 </Project>
