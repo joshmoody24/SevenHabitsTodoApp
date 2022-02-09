@@ -42,6 +42,7 @@ namespace SevenHabitsTodoApp.Controllers
         [HttpPost]
         public IActionResult CreateTask(TaskEntry taskEntry)
         {
+            ViewBag.New = true; //set this variable to indicate that you are adding new task not from the seeded databse
             if (ModelState.IsValid)
             {
                 taskEntryContext.Add(taskEntry);
@@ -74,11 +75,11 @@ namespace SevenHabitsTodoApp.Controllers
                 taskEntryContext.SaveChanges();
                 return RedirectToAction("Index");
             }
-            else
-            {
-                ViewBag.Categories = taskEntryContext.Categories.ToList();
-                return View("CreateTask");
-            }
+            ViewBag.New = false;
+            
+            ViewBag.Categories = taskEntryContext.Categories.ToList();
+            return View("CreateTask");
+            
         }
 
         [HttpGet]
