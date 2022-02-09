@@ -1,0 +1,67 @@
+﻿@{
+    ViewData["Title"] = "Update Tasks";
+}
+
+@*I need to call the model here*@
+
+<div class="page-header min-vh-80" style="background-image: url('https://source.unsplash.com/-1_RZL8BGBM') ">
+    <span class="mask bg-gradient-dark opacity-6"></span>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 mx-auto">
+                <div class="text-center">
+                    <h1 class="text-white">Add/Edit Tasks</h1>
+                    <a asp-controller="Home" asp-action="index" class="btn bg-gradient-primary btn-icon">
+                        <div class="d-flex align-items-center">
+                            <i class="material-icons me-2" aria-hidden="true">home</i>
+                            Back To Home
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card card-body shadow-xl mx-3 mx-md-4 mt-n6">
+    <div class="container">
+        <div class="section text-center">
+            <h2 class="title">Update Tasks By Filling Out the Form Below</h2>
+
+            <!-- Form connected to SQLite Database -->
+            <form method="post">
+                <div asp-validation-summary="All"></div>
+
+                <!--Task Field-->
+                <label asp-for="Task"><strong>Task:</strong></label><br />
+                <input asp-for="Task" /><br />
+
+                <!--Due Date-->
+                <label asp-for="DueDate"><strong>Due Date:</strong></label><br />
+                <input asp-for="DueDate" /><br />
+
+                <!--Quadrant Field-->
+                <label asp-for="Quadrant"><strong>Quadrant:</strong></label><br />
+                <input asp-for="Quadrant" /><br />
+
+                <!--Category Field-->
+                <label asp-for="Category"><strong>Category:</strong></label><br />
+                <select asp-for="Category">
+                    <option value="Home">Home</option>
+                    <option value="School">School</option>
+                    <option value="Work">Work</option>
+                    <option value="Church">Church</option>
+                </select><br />
+
+                <!--Completed Field-->
+                <label asp-for="Completed"><strong>Completed:</strong></label><br />
+                <select asp-for="Completed">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select><br />
+
+                <!--Submit Button-->
+                <button type="submit">Submit Application</button>
+            </form>
+        </div>
+    </div>
+</div>
