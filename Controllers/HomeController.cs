@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using SevenHabitsTodoApp.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace SevenHabitsTodoApp.Controllers
 {
@@ -32,11 +33,18 @@ namespace SevenHabitsTodoApp.Controllers
             return View();
         }
 
+        public IActionResult TaskList()
+        {
+            var tasks = taskEntryContext.Responses.Include(x => x.CategoryName).ToList();
+            return View(tasks);
+        }
+
         [HttpGet]
         public IActionResult CreateTask()
         {
-            List<Category> categories = taskEntryContext.Categories.ToList();
-            return View(categories);
+            ViewBag.categories = taskEntryContext.Categories.ToList();
+            
+            return View("TaskApplication");
         }
 
         [HttpPost]
@@ -53,17 +61,17 @@ namespace SevenHabitsTodoApp.Controllers
             else
             {
                 ViewBag.Categories = taskEntryContext.Categories.ToList();
-                return View();
+                return View("TaskApplication");
             }
         }
 
         [HttpGet]
-        public IActionResult EditTask(int taskEntryId)
+        public IActionResult EditTask(int taskid)
         {
             //reuse create task as edit form
             ViewBag.Categories = taskEntryContext.Categories.ToList();
-            var taskEntry = taskEntryContext.Responses.Single(x => x.TaskID == taskEntryId);
-            return View("CreateTask", taskEntry);
+            var taskEntry = taskEntryContext.Responses.Single(x => x.TaskID == taskid);
+            return View("TaskApplication", taskEntry);
         }
 
         [HttpPost]
@@ -83,9 +91,9 @@ namespace SevenHabitsTodoApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult DeleteTask(int taskEntryId)
+        public IActionResult DeleteTask(int taskid)
         {
-            TaskEntry taskEntry = taskEntryContext.Responses.Single(x => x.TaskID == taskEntryId);
+            var taskEntry = taskEntryContext.Responses.Single(x => x.TaskID == taskid);
 
             return View(taskEntry);
         }

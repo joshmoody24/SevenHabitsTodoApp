@@ -44,12 +44,14 @@
                 <input asp-for="Quadrant" /><br />
 
                 <!--Category Field-->
-                <label asp-for="Category"><strong>Category:</strong></label><br />
-                <select asp-for="Category">
-                    <option value="Home">Home</option>
-                    <option value="School">School</option>
-                    <option value="Work">Work</option>
-                    <option value="Church">Church</option>
+                <label asp-for="CategoryName"><strong>Category:</strong></label><br />
+                <select asp-for="CategoryID">
+                    <option value="">Select a Category</option>
+                    <!--This will let people select from a list of category names-->
+                    @foreach (Category m in ViewBag.Categories)
+                    {
+                        <option value="@m.CategoryID">@m.CategoryName</option>
+                    }
                 </select><br />
 
                 <!--Completed Field-->
@@ -63,9 +65,9 @@
                 <button type="submit">Submit Application</button>
                 @if (ViewBag.New == false)
                 {
-                    <input type="hidden" asp-for="TaskID"/>
+                    <input type="hidden" asp-for="TaskID" />
                 }
-                </form>
+            </form>
         </div>
     </div>
 </div>
