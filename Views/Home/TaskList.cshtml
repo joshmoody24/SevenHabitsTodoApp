@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Task List";
+}
+
+@model List<TaskEntry>
+
+<table class="table table-bordered">
+    <thead class="font-weight-bold">
+        <tr>
+            <td>Task</td>
+            <td>DueDate</td>
+            <td>Quadrant</td>
+            <td>Completed</td>
+            
+        </tr>
+    </thead>
+
+    <tbody>
+        <!--for each entry create table row, td= table domain-->
+        @foreach (var x in Model)
+        {
+            <tr>
+                <td>@x.Task</td>
+                <td>@x.DueDate</td>
+                <td>@x.Quadrant</td>
+                <td>@x.Completed</td>
+
+                <td><a asp-controller="Home" asp-action="EditTask" asp-route-taskid="@x.TaskID">Edit</a></td>
+                <td><a asp-controller="Home" asp-action="DeleteTask" asp-route-taskid="@x.TaskID">Delete</a></td>
+
+
+            </tr>
+        }
+    </tbody>
+</table>

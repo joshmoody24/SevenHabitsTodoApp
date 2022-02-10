@@ -2,7 +2,7 @@
     ViewData["Title"] = "Update Tasks";
 }
 
-@model SevenHabitsTodoApp.Models.TaskEntry 
+@model SevenHabitsTodoApp.Models.TaskEntry
 
 <div class="page-header min-vh-80" style="background-image: url('https://source.unsplash.com/-1_RZL8BGBM') ">
     <span class="mask bg-gradient-dark opacity-6"></span>
@@ -48,10 +48,10 @@
                 <select asp-for="CategoryID">
                     <option value="">Select a Category</option>
                     <!--This will let people select from a list of category names-->
-                    @foreach (Category m in ViewBag.Categorys)
-                        {
-                            <option value="@m.CategoryID">@m.CategoryName</option>
-                        }
+                    @foreach (Category m in ViewBag.Categories)
+                    {
+                        <option value="@m.CategoryID">@m.CategoryName</option>
+                    }
                 </select><br />
 
                 <!--Completed Field-->
@@ -63,6 +63,10 @@
 
                 <!--Submit Button-->
                 <button type="submit">Submit Application</button>
+                @if (ViewBag.New == false)
+                {
+                    <input type="hidden" asp-for="TaskID" />
+                }
             </form>
         </div>
     </div>
