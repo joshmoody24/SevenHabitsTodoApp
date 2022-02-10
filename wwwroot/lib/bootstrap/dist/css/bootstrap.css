@@ -733,6 +733,9 @@ progress {
     }
 }
 
+.quad-container {
+    
+}
 .row {
     --bs-gutter-x: 1.5rem;
     --bs-gutter-y: 0;
@@ -754,6 +757,8 @@ progress {
 
 .col {
     flex: 1 0 0%;
+    border: 1px solid black;
+    padding: 30px;
 }
 
 .row-cols-auto > * {
