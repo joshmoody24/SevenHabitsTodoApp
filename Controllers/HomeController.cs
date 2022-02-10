@@ -25,12 +25,8 @@ namespace SevenHabitsTodoApp.Controllers
 
         public IActionResult Index()
         {
-            return View();
-        }
-
-        public IActionResult Quadrant()
-        {
-            return View();
+            List<TaskEntry> tasks = taskEntryContext.Responses.ToList();
+            return View(tasks);
         }
 
         public IActionResult TaskList()
