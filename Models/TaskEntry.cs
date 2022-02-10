@@ -15,6 +15,7 @@ namespace SevenHabitsTodoApp.Models
         public string DueDate { get; set; }
 
         [Required]
+        [Range(1,4)]
         public int Quadrant { get; set; }
 
         public bool Completed { get; set; }

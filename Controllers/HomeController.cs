@@ -25,13 +25,13 @@ namespace SevenHabitsTodoApp.Controllers
 
         public IActionResult Index()
         {
-            List<TaskEntry> tasks = taskEntryContext.Responses.ToList();
+            List<TaskEntry> tasks = taskEntryContext.Responses.Where(x => x.Completed == false).ToList();
             return View(tasks);
         }
 
         public IActionResult TaskList()
         {
-            var tasks = taskEntryContext.Responses.Include(x => x.CategoryName).ToList();
+            var tasks = taskEntryContext.Responses.Where(x => x.Completed == false).Include(x => x.CategoryName).ToList();
             return View(tasks);
         }
 
@@ -82,7 +82,7 @@ namespace SevenHabitsTodoApp.Controllers
             ViewBag.New = false;
             
             ViewBag.Categories = taskEntryContext.Categories.ToList();
-            return View("TaskList");
+            return View("TaskApplication");
             
         }
 
@@ -99,7 +99,7 @@ namespace SevenHabitsTodoApp.Controllers
         {
             taskEntryContext.Responses.Remove(taskEntry);
             taskEntryContext.SaveChanges();
-            return RedirectToAction("TaskList");
+            return RedirectToAction("Index");
         }
     }
 }
